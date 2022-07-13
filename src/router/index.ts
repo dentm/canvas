@@ -1,16 +1,19 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
-        path:'/',
-        name:'canvas1',
-        component: () => import('@/views/canvas1.vue')
+        path: '/',
+        redirect: '/canvas1'
     },
-    {
-        path:'/canvas2',
-        name:'canvas2',
-        component: () => import('@/views/canvas2.vue')
-    }
+    ...(Object.entries(import.meta.globEager('../views/*.vue')).map(item => {
+        let [name, module] = item;
+        name = (name.match(/^\.\.\/views\/(.+)\.vue$/)!)[1];
+        return {
+            path: `/${name}`,
+            name,
+            component: module.default
+        }
+    }))
 ]
 
 const router = createRouter({

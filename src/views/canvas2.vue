@@ -1,5 +1,6 @@
 <template>
-    <canvas ref="canvas" @click="reload" width="500" height="500" style="border:1px solid #000"></canvas>
+    <canvas ref="canvas" @click="reload" width="500" height="500"
+        style="border:1px solid #000;background: #000;"></canvas>
 </template>
 
 <script lang="ts" setup>
@@ -83,6 +84,7 @@ function startAnimation() {
 const reload = () => {
     cancelAnimationFrame(req);
     ctx.value.clearRect(0, 0, 500, 500);
+    pendingTasks.length = 0;
     init();
     startAnimation();
 }
