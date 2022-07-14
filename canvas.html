@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			.home-canavs-dotted{
+				width:10px;
+				height:10px;
+				-webkit-border-radius: 100%;
+				-moz-border-radius: 100%;
+				border-radius: 100%;
+				position: absolute; 
+				cursor:pointer;
+				border:2px solid #fff;
+			}
+			.course-test-gradual .canvas-alert,.course-test-gradual-broken .canvas-alert1,.course-test-gradual-broken .canvas-alert2,.course-test-gradual-broken .canvas-alert3{
+				position:absolute;
+				width:100px;
+				height:50px;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+				display:none;
+				z-index:1;
+			}
+			.course-test-gradual .canvas-alert h6,.course-test-gradual-broken .canvas-alert1 h6,.course-test-gradual-broken .canvas-alert2 h6,.course-test-gradual-broken .canvas-alert3 h6{
+				line-height:50px;
+				font-size:18px;
+				text-align:center;
+				color:#fff;
+				font-weight:bold;
+			}
+			.course-test-gradual .canvas-alert span,.course-test-gradual-broken .canvas-alert1 span,.course-test-gradual-broken .canvas-alert2 span,.course-test-gradual-broken .canvas-alert3 span{
+				position:absolute;
+				left:45px;
+				bottom:-8px;
+				border-left:8px solid transparent;
+				border-right:8px solid transparent;
+			}
+			.course-teacher-time-cir{
+				float: left;
+				position: relative;
+			}
+			.course-cir2-alert{
+				position: absolute;
+				width:150px;
+				height:80px;
+				top:160px;
+				left:50%;
+				margin-left:-75px;
+			}
+			.course-cir2-alert h5{
+				line-height:50px;
+				font-size:36px;
+				text-align:center;
+			}
+			.course-cir2-alert p{
+				line-height:30px;
+				font-size:18px;
+				color:#959595;
+				text-align:center;
+			}
+			.home-canavs-dotted{
+				width:10px;
+				height:10px;
+				-webkit-border-radius: 100%;
+				-moz-border-radius: 100%;
+				border-radius: 100%;
+				position: absolute; 
+				cursor:pointer;
+				border:2px solid #fff;
+			}
+			.home-test-line{
+				position: relative;
+			}
+			.canvas-alert1,.canvas-alert2{
+				position:absolute;
+				width:130px;
+				height:60px;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+				display:none;
+				z-index:1;
+			}
+			.canvas-alert1 h6,.canvas-alert2 h6{
+				font-size:16px;
+				color:#fff;
+				font-weight:bold;
+				text-align:center;
+				height:36px;
+				line-height:36px;
+				font-weight:bold;
+			}
+			.canvas-alert1 p,.canvas-alert2 p{
+				font-size:12px;
+				color:#FFF;
+				text-align:center;
+				height:14px;
+				line-height:14px;
+			}
+			.canvas-alert1 span,.canvas-alert2 span{
+				position:absolute;
+				left:60px;
+				bottom:-8px;
+				/*border-top:10px solid #fff;*/
+				border-left:8px solid transparent;
+				border-right:8px solid transparent;
+			}
+			/*------ 最后一个柱状图样式 -----*/
+			ul,li{
+				list-style: none;
+			}
+			.teacher-evaluate-time{
+				height:480px;
+				position:relative;
+			}
+			.teacher-canvas1,.teacher-canvas2{
+				width:90%;
+				height:390px;
+				margin-left:40px;
+				border-bottom:2px solid #efefef;
+				border-left:2px solid #efefef;
+				position:absolute;
+				z-index:1;
+			}
+			.teacher-canvas1-left-text{
+				width:38px;
+				height:20px;
+				position:absolute;
+				left:0;
+				top:0;
+				line-height:20px;
+				color:#868686;
+			}
+			.teacher-canvas-main-ul{
+				position:absolute;
+				left:40px;
+				top:0;
+				height:390px;
+				z-index:0;
+			}
+			.teacher-canvas-main-ul li{
+				border-right:2px solid #f7f7f7;
+				height:100%;
+				float:left;
+				margin-left:-2px;
+			}
+			.teacher-canvas-bottom-ul{
+				height:42px;
+				position:absolute;
+				left:40px;
+				top:390px;
+			}
+			.teacher-canvas-bottom-ul li{
+				line-height:40px;
+				text-align:center;
+				float:left;
+				font-size:14px;
+				color:#868686;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap;
+			}
+			.teacher-canvas1-column{
+				position:absolute;
+				bottom:0;
+				z-index:1;
+				cursor:pointer;
+			}
+			.teacher-alert-top{
+				position:absolute;
+				width:70px;
+				height:50px;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+				-webkit-box-shadow: 0 0 4px #ccc;
+				-moz-box-shadow: 0 0 4px #ccc;
+				box-shadow: 0 0 4px #ccc;
+				z-index:1;
+				display:none;
+			}
+			.teacher-alert-top h6{
+				line-height:50px;
+				text-align:center;
+				font-size:16px;
+				font-weight:bold;
+				color:#fff;
+			}
+			.teacher-alert-top span{
+				position:absolute;
+				/*border-top:10px solid #000;*/
+				border-left:8px solid transparent;
+				border-right:8px solid transparent;
+				left:50%;
+				margin-left:-5px;
+				top:50px;
+			}
+			/*------ 最后一个柱状图样式 end -----*/
+		</style>
+	</head>
+	<body>
+		<div class="course-test-gradual">
+			<div class="course-test-gradual-broken" style="float:left;">
+				<!--折线图 1 -->
+				<canvas id="course-test-canvas" height="480" width="1000"></canvas>
+				<div class="canvas-alert">
+					<h6></h6>
+					<span></span>
+				</div>
+			</div>
+			<!-- 横柱状图  2 -->
+			<div class="course-teacher-keyword-column" style="float:left;">
+				<canvas id="course-canvas2" width="600" height="440"></canvas>
+			</div>
+			<!-- 圈图 3 -->
+			<div class="course-teacher-time-cir" style="float:left;">
+				<canvas id="course-canvas4" width="398" height="380"></canvas>
+				<div class="course-cir2-alert">
+					<h5><i></i></h5>
+					<p>讲师授课百分比</p>
+				</div>
+			</div>
+			
+			<!-- 多条折线 4 -->
+			<div class="home-test-line home-test-line-test" style="float:left;width: 100%;">
+				<canvas id="course-canvas6" height="420"></canvas>
+				<div class="canvas-alert1">
+					<h6></h6>
+					<p></p>
+					<span></span>
+				</div>
+			</div>
+			<!-- 圆图 5 -->
+			<div class="home-test-cir1" style="float:left;">
+				<canvas id="course-canvas8" height="280" width="176"></canvas>
+			</div>
+			<!-- 圆图 6 -->
+			<div class="course-test-grade-left" style="float:left;">
+				<canvas id="course-test-canvas1" width="600" height="485"></canvas>
+			</div>
+			<!-- 圆图 7 -->
+			<div class="teacher-evaluate-cirimg">
+				<canvas id="teacher-canvas3" width="366" height="385"></canvas>
+			</div>
+			<!-- jq画的的柱状图  8 -->
+			<div class="teacher-evaluate-time" style="float:left;width: 100%;">			
+				<div class="teacher-canvas-main2">
+					<h5 class="teacher-canvas1-left-text">分数</h5>
+					<div class="teacher-canvas2">
+						<!--<div class="teacher-canvas1-column"></div>-->
+					</div>
+					<ul class="teacher-canvas-main-ul"></ul>
+					<ul class="teacher-canvas-bottom-ul"></ul>
+					<div class="teacher-alert-top">
+						<h6><i>0</i>分</h6>
+						<span></span>
+					</div>
+				</div>						
+			</div>
+		</div>
+		<script type="text/javascript">
+			var workStage = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] //底部阶段 
+		    var majordatas = [{  
+			        "testdata":[23,45,43,34,77,8,09,23,6,12,34,7,86,78,2,12,23,45,67],//每次数据
+			        "color": "#f65272",
+			        "title": "测试未及格专业分布情况",
+			        "bordercolor":"#ffcdd8"
+			    }]
+		    //折线图开始（1）
+			var homegradualFun = function(ctx,imgWidth,imgHeight,leftText,bottomText,bottomData,listDatas,heightNum,parentDIV){
+				/*
+				 * imgWidth //线图内宽 1120px
+				 * imgHeight //线图内高px
+				 * bottomData 底部分段的数据
+				 * leftText 左上文字
+				 * bottomText 右下文字
+				 * heightNum 垂直方向的最高分段
+				 * listDatas 折线的数据
+				 * parentDIV 父元素div的class
+				 */		
+				ctx.font = "16px 微软雅黑";
+				ctx.fillStyle ="#848484";
+				ctx.fillText(leftText,0,16);//左上文字-结束
+				ctx.font = "16px 微软雅黑"; 
+				ctx.fillStyle ="#848484";
+				ctx.fillText(bottomText,imgWidth+10,imgHeight+18);//左上文字-结束		
+				ctx.beginPath()
+				ctx.moveTo(40,0)
+				ctx.lineTo(40,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();
+				ctx.moveTo(40,imgHeight)
+				ctx.lineTo(imgWidth,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();	//大边框结束		
+				var lineWidth = Math.floor(imgWidth/(bottomData.length+1)) //每阶段的间距 (边界线的坐标)
+				for(var i=1;i<bottomData.length+1;i++){		
+					ctx.beginPath();
+					ctx.moveTo(lineWidth*i+40,0)
+					ctx.lineTo(lineWidth*i+40,imgHeight)
+					ctx.strokeStyle="#eee";
+					ctx.stroke();
+				} //画出每个阶段的竖线-结束		
+				for(var j=0;j<bottomData.length;j++){
+					ctx.font = "14px 微软雅黑"; 
+					ctx.fillStyle ="#848484";
+					ctx.fillText(bottomData[j],lineWidth*j+36+lineWidth,imgHeight+20);//画出下面的阶段名称-结束
+				}		
+				var testColumn = heightNum; //垂直方向以最高200为标准		
+				var columnOne = imgHeight/testColumn //垂直方向一个单位的高度
+				for(var i=0;i<listDatas.length;i++){
+					ctx.beginPath();
+					
+					ctx.strokeStyle=listDatas[i].color;
+					ctx.moveTo(40,imgHeight)
+					for(var j=0;j<listDatas[i].testdata.length;j++){
+						
+						
+						ctx.lineWidth = 4;
+						ctx.lineTo(lineWidth*(j+1)+40,Math.floor((testColumn-listDatas[i].testdata[j])*columnOne))
+						ctx.lineTo(lineWidth*(j+2)+40,Math.floor((testColumn-listDatas[i].testdata[j+1])*columnOne))
+		//				ctx.stroke();  //折线-结束	
+						var canavsDotted = $('<div class="home-canavs-dotted" data_color="'+listDatas[i].color+'" data_column="'+(j+1)+'" data_tit="'+listDatas[i].title+'" data_row="'+listDatas[i].testdata[j]+'" data_shadow="'+listDatas[i].bordercolor+'" data_rowx="'+(lineWidth*(j+1)+34)+'" data_columny="'+(Math.floor((testColumn-listDatas[i].testdata[j])*columnOne)-6)+'"><div>')
+						canavsDotted.css({'background':listDatas[i].color,'border':'2px solid'+listDatas[i].bordercolor,'border-color':listDatas[i].bordercolor,'left':lineWidth*(j+1)+34,'top':Math.floor((testColumn-listDatas[i].testdata[j])*columnOne)-10})
+						$(parentDIV).append(canavsDotted)
+					}
+					ctx.stroke();
+					ctx.lineTo(lineWidth*(listDatas[i].testdata.length)+40,Math.floor((testColumn-listDatas[i].testdata[listDatas[i].testdata.length-1])*columnOne))
+					ctx.lineTo(lineWidth*(listDatas[i].testdata.length)+40,imgHeight)
+					ctx.lineTo(40,imgHeight)
+					var testLg = ctx.createLinearGradient(0,40,0,imgHeight);
+					testLg.addColorStop(0,listDatas[i].color);
+					testLg.addColorStop(1,listDatas[i].bordercolor)
+					ctx.fillStyle = testLg; //渐变区域-结束
+					ctx.fill()
+					
+				}			
+			}
+			$('.course-test-gradual-broken').on('click','div.home-canavs-dotted',function(){ //点击折线上的小点
+				var dottedColor=$(this).attr('data_color')
+				var dottedColumn=$(this).attr('data_column')
+				var dottedRow=$(this).attr('data_row')
+				var dottedX=$(this).attr('data_rowx')
+				var dottedY=$(this).attr('data_columny')
+				var dottedTit=$(this).attr('data_tit')
+				var dottedShadow=$(this).attr('data_shadow')
+				$('.canvas-alert').css({'background':dottedColor,'box-shadow':'0 0 10px'+dottedShadow,'left':dottedX-46,'top':dottedY-63}).show();
+				$('.canvas-alert h6').text(dottedRow + "人");
+				$('.canvas-alert span').css({'border-top-width':'10px','border-top-style':'solid','border-top-color':dottedColor})
+			})
+			var testCir = document.getElementById("course-test-canvas")
+			var testCtx = testCir.getContext("2d");
+			$('#course-test-canvas').attr('width',$('.course-test-gradual-broken').width())
+			var canvasCenterWidth = $('.course-test-gradual-broken').width()-80
+			homegradualFun(testCtx,canvasCenterWidth,360,'人数','专业',workStage,majordatas,200,'.course-test-gradual-broken')	//作业折线	
+			
+			// 横柱状图（2） --------------------------
+			var antistop = [
+				{'word':'瑞文',"wordRate":'0.6'},
+				{'word':'卡特',"wordRate":'0.4'},
+				{'word':'蒙多',"wordRate":'0.5'},
+				{'word':'光辉',"wordRate":'0.7'},
+				{'word':'盖伦',"wordRate":'0.2'},
+				{'word':'剑圣',"wordRate":'0.1'},
+				{'word':'蛮王',"wordRate":'0.52'}
+				]
+			var antistopRate = ["10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"]
+			var courseWordFun = function(ctx,bottomText,imgWidth,imgHeight,bottomData,heightNum){
+				/*
+				 * imgWidth //线图内宽 1120px
+				 * imgHeight //线图内高px
+				 * bottomData 底部分段的数据
+				 * bottomText 右下文字
+				 * heightNum 垂直方向数组
+				 */		
+				ctx.font = "16px 微软雅黑"; 
+				ctx.fillStyle ="#848484";
+				ctx.fillText(bottomText,imgWidth+20,imgHeight+18);//右下文字-结束		
+				ctx.beginPath()
+				ctx.moveTo(40,0)
+				ctx.lineTo(40,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();
+				ctx.moveTo(40,imgHeight)
+				ctx.lineTo(imgWidth,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();	//大边框结束		
+				var lineWidth = Math.floor(imgWidth/(bottomData.length+1)) //每阶段的间距 (边界线的坐标)
+				for(var i=1;i<bottomData.length+1;i++){		
+					ctx.beginPath();
+					ctx.moveTo(lineWidth*i+40,0)
+					ctx.lineTo(lineWidth*i+40,imgHeight)
+					ctx.strokeStyle="#eee";
+					ctx.stroke();
+				} //画出每个阶段的竖线-结束		
+				for(var j=0;j<bottomData.length;j++){
+					ctx.font = "14px 微软雅黑"; 
+					ctx.fillStyle ="#848484";
+					ctx.textAlige = 'center'
+					ctx.fillText(bottomData[j],lineWidth*j+30+lineWidth,imgHeight+20);//画出下面的阶段名称-结束
+				}		
+				var testColumn = heightNum.length;
+				var columnOne = imgHeight/testColumn //垂直方向一个单位的高度
+				for(var i=0;i<heightNum.length;i++){
+					var lineColorStart = "#b073f4";
+					var lineColorEnd = "#d261b9";
+					ctx.font = "12px 微软雅黑";
+					ctx.fillStyle = "#848484";
+					ctx.textBaseline = 'middle';
+					ctx.fillText(heightNum[i].word,0,Math.floor(columnOne*(2/4)+columnOne*i)) //左边排列-结束
+					if(heightNum[i].wordRate >= 0.5){
+						lineColorStart = "#41b5f6";
+						lineColorEnd = "#99d9e7"
+					}
+					ctx.beginPath();
+					var lg = ctx.createLinearGradient(40,columnOne*(1/5)+columnOne*i,Math.floor(imgWidth*heightNum[i].wordRate),Math.floor(columnOne*(3/5)));
+					lg.addColorStop(0,lineColorStart);
+					lg.addColorStop(1,lineColorEnd)
+					ctx.fillStyle = lg; //渐变-结束
+					ctx.fillRect(40,columnOne*(1/5)+columnOne*i,Math.floor(lineWidth*antistopRate.length*heightNum[i].wordRate),Math.floor(columnOne*(3/5)));
+					ctx.closePath(); //水平条-结束
+					ctx.font = "12px 微软雅黑";
+					ctx.fillStyle = "#fff";
+					ctx.textBaseline = 'middle';
+					ctx.fillText(heightNum[i].wordRate*100+'%',lineWidth*antistopRate.length*heightNum[i].wordRate+10,columnOne*(2/4)+columnOne*i)
+				}
+			}
+			var courseCir2 = document.getElementById("course-canvas2");
+		    var courseCtx2 = courseCir2.getContext("2d");
+			courseWordFun(courseCtx2,'百分比',510,370,antistopRate,antistop) // 讲师发言横向柱状图
+			
+			// 圈图 (3) ----------------------------
+			var arcFun = function(ctx,arcCloor1,arcCloor2,ratio,ratio2,homeAirX,homeAirY,arcText1,arcText2){
+				/*arcCloor1 底层浅色圆颜色 #
+				 * arcCloor2 比例圆、线、文字、内圆框 颜色
+				 * ratio 数据所占比例 0.1
+				 * homeAirX 圆心水平坐标 87
+				 * homeAirY 圆心垂直坐标 140
+				 * arcText 顶部解释文字
+				 */	    
+			    var RightData = ratio // 数据所占比例
+			    var homeCtx3Data1 = (-90 + ratio*360)*Math.PI/180; //按比例算出结束角度
+			    var homeCtx3Data = (-90 + ratio*360 + 0.02*360)*Math.PI/180;
+			    var homeCtx3Data2 = (-90 + (ratio+0.02)*360 + ratio2*360)*Math.PI/180;
+				ctx.beginPath();
+				ctx.moveTo(homeAirX,homeAirY);
+				ctx.fillStyle=arcCloor2;
+				ctx.arc(homeAirX,homeAirY,160,Math.PI*(3/2),homeCtx3Data1);
+				ctx.fill();//外层比例区域(实体)
+				ctx.beginPath();
+				ctx.fillStyle="#fff";
+				ctx.arc(homeAirX,homeAirY,120,0,Math.PI*2);
+				ctx.fill();//圆心空白区域
+				ctx.beginPath();
+				ctx.moveTo(homeAirX,homeAirY);
+			    ctx.fillStyle="#fff";
+				ctx.arc(homeAirX,homeAirY,150,(-90 + (ratio)*360)*Math.PI/180,homeCtx3Data)
+				ctx.fill(); //白色边框区域		
+				ctx.beginPath();
+				ctx.moveTo(homeAirX,homeAirY);
+			    ctx.fillStyle=arcCloor1;
+				ctx.arc(homeAirX,homeAirY,150,(-90 + (ratio+0.02)*360)*Math.PI/180,homeCtx3Data2)
+				ctx.fill(); //内层
+				ctx.beginPath(); 
+				ctx.fillStyle="#fff";
+				ctx.arc(homeAirX,homeAirY,110,0,Math.PI*2);
+				ctx.fill();//圆心空白区域	
+				ctx.beginPath()
+				ctx.moveTo(285,60)
+				ctx.lineTo(300,25)
+				ctx.lineTo(330,25)
+				ctx.lineWidth = 2
+				ctx.strokeStyle=arcCloor2;	
+				ctx.stroke(); //折线-结束
+				ctx.font = "16px 微软雅黑"; 
+				ctx.fillStyle =arcCloor2;
+				ctx.textBaseline = 'middle';	
+				ctx.fillText(arcText1,340,25);	 //上部文字结束	
+				ctx.beginPath()
+				ctx.moveTo(150,336)
+				ctx.lineTo(120,370)
+				ctx.lineTo(80,370)
+				ctx.lineWidth = 2
+				ctx.strokeStyle=arcCloor1;	
+				ctx.stroke(); //折线-结束
+				ctx.font = "16px 微软雅黑"; 
+				ctx.fillStyle =arcCloor1;
+				ctx.textBaseline = 'middle';	
+				ctx.fillText(arcText2,20,370);	 //上部文字结束
+				$('.course-cir2-alert h5').css({'color':arcCloor2})
+				$('.course-cir2-alert h5 i').text((ratio2+0.04)*100+'%')
+		    }
+			var courseCir4 = document.getElementById("course-canvas4")
+			var courseCtx4 = courseCir4.getContext('2d')
+			arcFun(courseCtx4,'#48aef9','#ffbe50',0.2,0.76,200,196,'10分钟','35分钟')  
+			
+			// 多条折线（4）
+			//测试完成情况 数据
+			var testStage = [1,2,3,4,5,6,7,8,9,10] //底部阶段
+		    var testdatas = [{ 
+			        "testdata":[12,33,45,66,22,33,12,4,5,68],
+			        "color": "#48aef9",
+			        "title": "通过",
+			        "bordercolor":"#95d0fc"
+			    },{
+			        "testdata":[3,45,66,88,23,12,65,55,9,10],
+			        "color": "#f3607d",
+			        "title": "未通过",
+			        "bordercolor":"#f7a3b3"
+			    },{
+			        "testdata":[22,3,44,23,33,22,78,2,44,12], 
+			        "color": "#ffbe50",
+			        "title": "未参加",
+			        "bordercolor":"#ffd89a"
+		    	}];  
+		    var homeLineFun = function(ctx,imgWidth,imgHeight,leftText,bottomText,bottomData,listDatas,heightNum,parentDIV){
+				/*
+				 * imgWidth //线图内宽 1120px
+				 * imgHeight //线图内高px
+				 * bottomData 底部分段的数据
+				 * leftText 左上文字
+				 * bottomText 右下文字
+				 * heightNum 垂直方向的最高分段
+				 * listDatas 折线的数据
+				 * parentDIV 父元素div的class
+				 */		
+				ctx.font = "16px 微软雅黑";
+				ctx.fillStyle ="#848484";
+				ctx.fillText(leftText,0,16);//左上文字-结束
+				ctx.font = "16px 微软雅黑"; 
+				ctx.fillStyle ="#848484";
+				ctx.fillText(bottomText,imgWidth+10,imgHeight+18);//左上文字-结束		
+				ctx.beginPath()
+				ctx.moveTo(40,0)
+				ctx.lineTo(40,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();
+				ctx.moveTo(40,imgHeight)
+				ctx.lineTo(imgWidth,imgHeight)
+				ctx.strokeStyle="#ddd";
+				ctx.stroke();	//大边框结束		
+				var lineWidth = Math.floor(imgWidth/(bottomData.length+1)) //每阶段的间距 (边界线的坐标)
+				for(var i=1;i<bottomData.length+1;i++){		
+					ctx.beginPath();
+					ctx.moveTo(lineWidth*i+40,0)
+					ctx.lineTo(lineWidth*i+40,imgHeight)
+					ctx.strokeStyle="#eee";
+					ctx.stroke();
+				} //画出每个阶段的竖线-结束		
+				for(var j=0;j<bottomData.length;j++){
+					ctx.font = "14px 微软雅黑"; 
+					ctx.fillStyle ="#848484";
+					ctx.fillText(bottomData[j],lineWidth*j+36+lineWidth,imgHeight+20);//画出下面的阶段名称-结束
+				}		
+				var testColumn = heightNum; //垂直方向以最高200为标准		
+				var columnOne = imgHeight/testColumn //垂直方向一个单位的高度
+				for(var i=0;i<listDatas.length;i++){
+					for(var j=0;j<listDatas[i].testdata.length;j++){
+						ctx.beginPath();
+						ctx.lineWidth = 2;
+						ctx.strokeStyle=listDatas[i].color;
+						ctx.moveTo(lineWidth*(j+1)+40,Math.floor((testColumn-listDatas[i].testdata[j])*columnOne))
+						ctx.lineTo(lineWidth*(j+2)+40,Math.floor((testColumn-listDatas[i].testdata[j+1])*columnOne))
+						ctx.stroke();  //折线-结束	
+						var canavsDotted = $('<div class="home-canavs-dotted" data_color="'+listDatas[i].color+'" data_column="'+(j+1)+'" data_tit="'+listDatas[i].title+'" data_row="'+listDatas[i].testdata[j]+'" data_shadow="'+listDatas[i].bordercolor+'" data_rowx="'+(lineWidth*(j+1)+38)+'" data_columny="'+(Math.floor((testColumn-listDatas[i].testdata[j])*columnOne))+'"><div>')
+						canavsDotted.css({'background':listDatas[i].color,'border':'2px solid'+listDatas[i].bordercolor,'border-color':listDatas[i].bordercolor,'left':lineWidth*(j+1)+34,'top':Math.floor((testColumn-listDatas[i].testdata[j])*columnOne)-6})
+						$(parentDIV).append(canavsDotted)
+					}
+				}			
+			}	
+		    var courseCir6 = document.getElementById("course-canvas6")
+			var courseCtx6 = courseCir6.getContext("2d");
+			$('#course-canvas6').attr('width',$('.home-test-line').width());
+			var canvasCenterWidth2 = $('.home-test-line').width()-100
+			homeLineFun(courseCtx6,canvasCenterWidth2,360,'人数','测试次数',testStage,testdatas,100,'.home-test-line-test') //测试折线
+			// 点击折点
+			$('.home-test-line-test').on('click','div.home-canavs-dotted',function(){
+				var dottedColor=$(this).attr('data_color')
+				var dottedColumn=$(this).attr('data_column')
+				var dottedRow=$(this).attr('data_row')
+				var dottedX=$(this).attr('data_rowx')
+				var dottedY=$(this).attr('data_columny')
+				var dottedTit=$(this).attr('data_tit')
+				var dottedShadow=$(this).attr('data_shadow')
+				$('.canvas-alert1').css({'background':dottedColor,'box-shadow':'0 0 10px'+dottedShadow,'left':dottedX-65,'top':dottedY-78}).show();
+				$('.canvas-alert1 h6').text(dottedRow + "人");
+				$('.canvas-alert1 p').text("第"+dottedColumn+"次"+dottedTit);
+				$('.canvas-alert1 span').css({'border-top-width':'10px','border-top-style':'solid','border-top-color':dottedColor})	
+			})	
+			
+			// 圆图比例图（5）
+			var passRate = 0.2;
+			var rightArcFun = function(ctx,arcCloor1,arcCloor2,ratio,homeAirX,homeAirY,arcText){
+				/*arcCloor1 底层浅色圆颜色 #
+				 * arcCloor2 比例圆、线、文字、内圆框 颜色
+				 * ratio 数据所占比例 0.8
+				 * homeAirX 圆心水平坐标 87
+				 * homeAirY 圆心垂直坐标 140
+				 * arcText 顶部解释文字
+				 */	    
+			    var RightData = ratio // 数据所占比例
+		//	    var homeCtx3Data = (-90 + RightData*360)*Math.PI/180; //按比例算出结束角度
+				var homeCtx3Data = ((Math.abs(1.5+RightData*2))*Math.PI)
+			    ctx.beginPath();
+			    ctx.fillStyle=arcCloor1;
+				ctx.arc(homeAirX,homeAirY,80,0,Math.PI*2)
+				ctx.fill(); //原先圆
+				ctx.beginPath(); 
+				ctx.fillStyle="#fff";
+				ctx.arc(homeAirX,homeAirY,60,0,Math.PI*2);
+				ctx.fill();//圆心空白区域
+				ctx.beginPath(); 
+				ctx.moveTo(homeAirX,homeAirY);
+				ctx.fillStyle=arcCloor2;
+				ctx.arc(homeAirX,homeAirY,85,Math.PI*(3/2),homeCtx3Data);
+				ctx.fill();//所占比例区域(实体)
+				ctx.beginPath(); 
+				ctx.fillStyle="#fff";
+				ctx.arc(homeAirX,homeAirY,55,0,Math.PI*2);
+				ctx.fill();//圆心空白区域	
+				ctx.beginPath(); 
+				ctx.strokeStyle=arcCloor2;
+				ctx.arc(homeAirX,homeAirY,50,Math.PI*(3/2),homeCtx3Data);
+				ctx.stroke();//所占比例区域(虚线)	
+				ctx.beginPath()
+				ctx.moveTo(118,67)
+				ctx.lineTo(140,28)
+				ctx.lineTo(10,28)
+				ctx.lineWidth = 2
+				ctx.strokeStyle=arcCloor2;	
+				ctx.stroke(); //折线-结束
+				ctx.font = "18px 微软雅黑"; 
+				ctx.fillStyle =arcCloor2;
+				ctx.textAlign = 'center';
+				ctx.fillText(RightData*100+'%'+arcText,75,22);	 //顶部文字结束	
+				$('.home-cir2-alert h5').css({'color':arcCloor2})
+		    }
+			var courseCir8 = document.getElementById("course-canvas8");
+		    var courseCtx8 = courseCir8.getContext("2d");//home页右边第一个
+		    rightArcFun(courseCtx8,'#afddff','#48aef9',passRate,87,140,'测试通过率')  
+			
+			// 圆图 （6）
+			var testTopData = [{  //每部分圆的数据
+		        "value": 0.1,
+		        "color": "#48aef9",
+		        "title": "已完成",
+		        "explain": "成绩及格人数",
+		        "peoplenum":"25"
+		    },{
+		        "value": 0.4,
+		        "color": "#ffbe50",
+		        "title": "进行中",
+		        "explain": "未参加测试人数",
+		        "peoplenum":"40"
+		    },{
+		        "value": 0.5,
+		        "color": "#F3607E",
+		        "title": "未开始",
+		        "explain": "成绩不及格人数",
+		        "peoplenum":"35"
+		    }];
+			var courseArc = function(ctx,x0,y0,radius,data){
+		    	/* x0 圆心水平坐标
+		    	 * y0 圆心垂直坐标
+		    	 * radius 半径
+		    	 * data 每一部分的数据
+		    	 */
+			    var tempAngle = -90;
+			    for(var i=0;i<data.length;i++){
+			        // 开始绘制新状态的扇形
+			        ctx.beginPath();
+			        ctx.moveTo(x0,y0);
+			        ctx.fillStyle = data[i].color;
+			        var angle = data[i].value*360;
+			        var startAngle = tempAngle*Math.PI/180; 
+			        var endAngle = (tempAngle + angle)*Math.PI/180;
+			        ctx.arc(x0, y0, radius, startAngle, endAngle);
+			        tempAngle+=angle;
+					ctx.fill();
+			    }
+			    if(data[0].value>0){
+				    ctx.beginPath();
+					var lineY = radius*Math.sin((90-data[0].value/2*360)*2*Math.PI/360) //对边垂直
+			        var lineX = radius*Math.cos((90-data[0].value/2*360)*2*Math.PI/360) //临边水平
+			        ctx.strokeStyle = data[0].color;
+			        ctx.lineWidth = 2;
+			        ctx.moveTo(x0+lineX,y0-lineY);
+			        ctx.lineTo(x0+lineX+40,y0-lineY-12);
+			        ctx.lineTo(x0+lineX+80,y0-lineY-12);
+			        ctx.stroke();
+			        ctx.beginPath();
+			        ctx.arc(x0+lineX+82,y0-lineY-12,2,0,Math.PI*2)
+			        ctx.stroke();
+			        ctx.fillStyle=data[0].color;
+			        ctx.font = "bold 18px 微软雅黑";
+			        ctx.textBaseline = 'middle';
+			        ctx.textAlign = 'center';
+			        ctx.fillText(data[0].peoplenum+'人',x0+lineX+82,y0-lineY+4)
+			        ctx.font = "14px 微软雅黑";
+			        ctx.fillStyle = "#848484";
+			        ctx.textBaseline = 'middle';
+			        ctx.fillText(data[0].explain,x0+lineX+82,y0-lineY+24,130)
+			    }//右边第一个
+		
+		        if(data[1].value>0){
+				    ctx.beginPath();
+					var lineX = radius*Math.sin((180-data[0].value*360-data[1].value/2*360)*2*Math.PI/360) //对边垂直
+			        var lineY = radius*Math.cos((180-data[0].value*360-data[1].value/2*360)*2*Math.PI/360) //临边水平
+					if(data[0].value>=0.4){
+						ctx.strokeStyle=data[1].color;
+				        ctx.moveTo(x0+lineX,y0+lineY)
+				        ctx.lineTo(x0+lineX-30,y0+lineY+25);
+				        ctx.lineTo(x0+lineX-80,y0+lineY+25);
+				        ctx.stroke();
+				        ctx.beginPath();
+				        ctx.arc(x0+lineX-82,y0+lineY+25,2,0,Math.PI*2)
+				        ctx.stroke();
+				        ctx.beginPath()
+						ctx.fillStyle=data[1].color
+				        ctx.font = "bold 18px 微软雅黑";
+				        ctx.textBaseline = 'middle';
+				        ctx.textAlign="center";
+				        ctx.fillText(data[1].peoplenum+'人',x0+lineX-82,y0+lineY+40)
+				        ctx.fill();
+				        ctx.font = "14px 微软雅黑";
+				        ctx.fillStyle = "#848484";
+				        ctx.textBaseline = 'middle';
+				        ctx.fillText(data[1].explain,x0+lineX-82,y0+lineY+60,130)	        
+					}else{
+						ctx.strokeStyle=data[1].color;
+				        ctx.moveTo(x0+lineX,y0+lineY)
+				        ctx.lineTo(x0+lineX+30,y0+lineY+25);
+				        ctx.lineTo(x0+lineX+80,y0+lineY+25);
+				        ctx.stroke();
+				        ctx.beginPath();
+				        ctx.arc(x0+lineX+82,y0+lineY+25,2,0,Math.PI*2)
+				        ctx.stroke();
+				        ctx.beginPath();
+				        ctx.fillStyle=data[1].color
+				        ctx.font = "bold 18px 微软雅黑";
+				        ctx.textBaseline = 'middle';
+				        ctx.textAlign="center";
+				        ctx.fillText(data[1].peoplenum+'人',x0+lineX+80,y0+lineY+40)
+				        ctx.fill();
+				        ctx.font = "14px 微软雅黑";
+				        ctx.fillStyle = "#848484";
+				        ctx.textBaseline = 'middle';
+				        ctx.fillText(data[1].explain,x0+lineX+80,y0+lineY+60,130)
+					    //中间第二个
+					}
+				}
+				if(data[2].value>0){
+				    ctx.beginPath();
+					var lineX = radius*Math.sin((360-data[0].value*360-data[1].value*360-data[2].value/2*360)*2*Math.PI/360) //对边垂直
+			        var lineY = radius*Math.cos((360-data[0].value*360-data[1].value*360-data[2].value/2*360)*2*Math.PI/360) //临边水平
+			        ctx.strokeStyle=data[2].color;
+			        ctx.moveTo(x0-lineX+10,y0-lineY)
+			        ctx.lineTo(x0-lineX-35,y0-lineY-12);
+			        ctx.lineTo(x0-lineX-75,y0-lineY-12);
+			        ctx.stroke();
+			        ctx.beginPath();
+			        ctx.arc(x0-lineX-77,y0-lineY-12,2,0,Math.PI*2)
+			        ctx.stroke();
+			        ctx.beginPath();
+			        ctx.fillStyle=data[2].color;
+			        ctx.font = "bold 18px 微软雅黑";
+			        ctx.textBaseline = 'middle';
+			        ctx.TextAlign = 'center';
+			        ctx.fillText(data[2].peoplenum+'人',x0-lineX-77,y0-lineY+5,70)
+			        ctx.fill();  //左边第三个
+			        ctx.font = "14px 微软雅黑";
+			        ctx.fillStyle = "#848484";
+			        ctx.TextAlign = 'center';
+			        ctx.textBaseline = 'middle';
+			        ctx.fillText(data[2].explain,x0-lineX-77,y0-lineY+25,130)
+			        
+					ctx.beginPath(); //圆心空白区域
+					ctx.fillStyle="#fff";
+					ctx.arc(x0,y0,110,0,Math.PI*2,true);
+					ctx.closePath();
+					ctx.fill();
+				}
+			}	
+			var testCir1 = document.getElementById("course-test-canvas1");
+			var testCtx1 = testCir1.getContext('2d');
+	    	courseArc(testCtx1,300,220,155,testTopData) //测试及格率图-结束
+		    
+		    // 圆图  （7）
+		  	var CourseSpecialize = [
+				{'course':'语文',"value":'0.8','color':'#48aef9'},
+			]
+			var teacherCourseFun = function(ctx,x0,y0,radius1,radius2,courseRate,centerClass){
+				/*
+				 * radius1 内圆半径
+				 * radius2 外圆半径
+				 * courseRate 课程信息
+				 */
+				ctx.beginPath();
+				ctx.moveTo(x0,y0);
+				ctx.fillStyle ="#ffbe50";
+				ctx.arc(x0, y0, radius1, 0,Math.PI*2);
+				
+				ctx.fill(); //底色圆结束		
+				ctx.beginPath();
+		        ctx.moveTo(x0,y0);
+		        ctx.fillStyle = courseRate[0].color;
+		        ctx.arc(x0, y0, radius2, Math.PI*3/2,(1+(0.5-courseRate[0].value*2))*Math.PI,true);
+				ctx.fill();		//比例圆-结束
+				ctx.beginPath(); //圆心空白区域
+				ctx.fillStyle="#fff";
+				ctx.arc(x0,y0,radius1-40,0,Math.PI*2,true);
+				ctx.closePath();
+				ctx.fill(); //圆-结束
+				$(centerClass+' h6').css({'color':courseRate[0].color}).text(courseRate[0].course)
+				$(centerClass+' p i').text(courseRate[0].value*10)
+			}
+			var teacherCir3 = document.getElementById("teacher-canvas3");
+		    var teacherCtx3 = teacherCir3.getContext("2d");
+		    teacherCourseFun(teacherCtx3,183,180,150,160,CourseSpecialize,'.teacher-course-specialize')
+		    
+		    // 柱状图 8
+	    	var coursedata = ['剑圣','卢西安','狼人','曙光','我理贝尔','诺克萨斯','嘉文四世','德邦总管','猴子','阿卡丽','卡特','盖伦','弥勒']
+		    var courseDatas = [{  //课程分数
+		        "persondata":[8,7,1,4,5,5,4,8,9,2,6,3,2],
+		        "startcolor": "#b670ea",
+		        "title": "课程评分",
+		        "endcolor":"#d261b9"
+			}]; 
+			var teachercolumnFun = function(parentsClass,parentClass,bottomData,data){
+				/*
+				 * parentsClass 最外层元素class名
+				 * parentClass 父元素class名
+				 * bottomData 底部文字列表
+				 * data 数据
+				 * 
+				 */
+				var lineWidth = Math.floor(($(parentClass).width()-40)/bottomData.length);//每一条宽度
+				$(parentsClass+' .teacher-canvas-bottom-ul').width($(parentClass).width()-40)
+				for(var i=0;i<bottomData.length;i++){
+					$(parentsClass+' '+'.teacher-canvas-main-ul').append('<li style="width:'+lineWidth/2+'px"></li><li style="width:'+lineWidth/2+'px"></li>') //画出竖线
+					$(parentsClass+' '+'.teacher-canvas-bottom-ul').append('<li style="width:'+lineWidth+'px">'+bottomData[i]+'</li>')
+				}
+				for(var i=0;i<data[0].persondata.length;i++){
+					var left = lineWidth*i-2+lineWidth/2
+					var columnDiv = $('<div data_color="'+data[0].endcolor+'" data_left="'+left+'" data_value="'+data[0].persondata[i]+'" class="teacher-canvas1-column" style="background:'+data[0].startcolor+'"></div>');
+					columnDiv.css({'width':lineWidth/2+'px','height':data[0].persondata[i]*10+'%','left':lineWidth/4+lineWidth*i-2+'px','background':'-webkit-linear-gradient('+data[0].startcolor+','+data[0].endcolor+')','background':'-o-linear-gradient('+data[0].startcolor+','+data[0].endcolor+')','background':'-moz-linear-gradient('+data[0].startcolor+','+data[0].endcolor+')','background': 'linear-gradient('+data[0].startcolor+','+data[0].endcolor+')'})
+					$(parentsClass+' '+parentClass).append(columnDiv)
+				}
+			}
+			$('.teacher-canvas-main2 .teacher-canvas2').on('click','div.teacher-canvas1-column',function(){
+				var teacherGrade = $(this).attr('data_value');
+				var alertLeft = $(this).attr('data_left');
+				var alertTop = $('.teacher-canvas2').height()*(10-teacherGrade)/10-63;
+				var alertColor = $(this).attr('data_color')
+				$('.teacher-canvas-main2 .teacher-alert-top').show().css({'top':alertTop,'background':alertColor,'left':alertLeft+'px'})
+				$('.teacher-canvas-main2 .teacher-alert-top h6 i').text(teacherGrade)
+				$('.teacher-canvas-main2 .teacher-alert-top span').css({'border-top':'10px solid '+alertColor})
+			})
+			teachercolumnFun('.teacher-canvas-main2','.teacher-canvas2',coursedata,courseDatas)
+		</script>
+	</body>
+</html>
