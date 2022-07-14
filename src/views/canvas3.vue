@@ -148,7 +148,6 @@ const drawPath2D = (ctx: CanvasRenderingContext2D) => {
     const rectBlock = new Path2D();
     rectBlock.arc(100, 100, 30, 0, 2 * Math.PI, false);
     ctx.stroke(rectBlock);
-    ctx.quadraticCurveTo
     const fillBlcok = new Path2D();
     fillBlcok.rect(200, 200, 100, 100);
     ctx.fill(fillBlcok)
