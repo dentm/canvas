@@ -43,8 +43,7 @@ const update = (list: SeriesItem[]) => {
 .wrapper {
     width: 400px;
     height: 200px;
-    border: 1px solid;
-    background: rgba($color: #000000, $alpha: 0.8);
+    background: rgba(15, 26, 40, 0.7);
     border-radius: 7px;
     position: fixed;
     left: calc(50% - 197px);

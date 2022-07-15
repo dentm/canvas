@@ -1,28 +1,36 @@
-export type OuterOption = {
-    ctx: CanvasRenderingContext2D,
-    lineWidth: number,
-    color?: string,
+interface OriginPoint {
     x: number,
     y: number,
-    radius: number,
+}
+
+interface Color {
+    color: string | any[],
+}
+
+interface Size {
+    width: number,
+    height: number
+}
+
+interface Angle {
     startAngle: number,
     endAngle: number
 }
 
-export type InnerOption = {
-    ctx: CanvasRenderingContext2D,
-    [propName: string]: any
+
+export interface ArcOption extends OriginPoint, Color, Angle {
+    lineWidth: number,
+    radius: number,
 }
 
-export type RectOption = {
-    ctx: CanvasRenderingContext2D,
-    [propName: string]: any
+export interface RectOption extends OriginPoint, Color, Size {
+
 }
 
-export type ImageOption = {
-    ctx: CanvasRenderingContext2D,
-    [propName: string]: any
+export interface ImageOption extends OriginPoint, Size {
+    imgSrc: string,
 }
+
 
 export type SeriesItem = {
     name: string,

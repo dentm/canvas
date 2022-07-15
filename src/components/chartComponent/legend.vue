@@ -38,7 +38,7 @@ const emits = defineEmits(['updateSeries'])
 
 const legendClick = (item: SeriesItem, index: number) => {
     item.disabled = !item.disabled;
-    emits('updateSeries', reactive(props.series.filter(item => !item.disabled)))
+    emits('updateSeries', props.series)
 }
 
 </script>
@@ -57,7 +57,7 @@ const legendClick = (item: SeriesItem, index: number) => {
         padding-bottom: 7px;
         padding-top: 15px;
         box-sizing: border-box;
-        border-bottom: 1px solid #373D48;
+        border-bottom: 1px solid rgba(55, 61, 72, 1);
 
         .color-block {
             display: inline-block;
@@ -65,6 +65,16 @@ const legendClick = (item: SeriesItem, index: number) => {
             height: 10px;
             margin-right: 7px;
             cursor: pointer;
+            position: relative;
+        }
+
+        .color-block::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: rgba(121, 133, 157, 1);
+            bottom: -12px;
         }
 
         .name {

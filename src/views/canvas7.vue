@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import pie from './component/usePie.vue'
+import pie from './example/pie.vue'
 
 </script>
 
