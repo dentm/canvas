@@ -1,4 +1,5 @@
 import { ArcOption, RectOption, ImageOption } from './../types/chartType';
+import gsap from 'gsap'
 
 export declare class CanvasType {
     drawArc(option: ArcOption): void
@@ -21,8 +22,9 @@ class TopCanvas implements CanvasType {
         this.height = height;
     }
 
-    public drawArc({ lineWidth = 10, color, x = 0, y = 0, radius = 30, startAngle = 0, endAngle = Math.PI * 2 }: ArcOption) {
+    public drawArc({ lineWidth = 10, color, x = 0, y = 0, radius = 30, startAngle = 0, endAngle = Math.PI * 2, lineCap = 'butt' }: ArcOption) {
         this.ctx.lineWidth = lineWidth;
+        this.ctx.lineCap = lineCap;
         this.ctx.beginPath();
         this.ctx.strokeStyle = Array.isArray(color) ? this.getLinearGradient(color) : color;
         this.ctx.arc(x, y, radius, startAngle, endAngle);
@@ -38,10 +40,14 @@ class TopCanvas implements CanvasType {
     }
 
     public drawImage({ x, y, imgSrc, width, height }: ImageOption) {
-        const img = new Image();
-        img.src = imgSrc;
-        img.onload = () => {
-            this.ctx.drawImage(img, x - width / 2, y - height / 2, width, height)
+        if (typeof imgSrc === 'string') {
+            const img = new Image();
+            img.src = imgSrc;
+            img.onload = () => {
+                this.ctx.drawImage(img, x - width / 2, y - height / 2, width, height)
+            }
+        } else {
+            this.ctx.drawImage(imgSrc, x - width / 2, y - height / 2, width, height)
         }
     }
 

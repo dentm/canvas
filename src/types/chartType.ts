@@ -20,6 +20,7 @@ interface Angle {
 
 export interface ArcOption extends OriginPoint, Color, Angle {
     lineWidth: number,
+    lineCap?: CanvasLineCap,
     radius: number,
 }
 
@@ -28,7 +29,7 @@ export interface RectOption extends OriginPoint, Color, Size {
 }
 
 export interface ImageOption extends OriginPoint, Size {
-    imgSrc: string,
+    imgSrc: string | HTMLCanvasElement,
 }
 
 
